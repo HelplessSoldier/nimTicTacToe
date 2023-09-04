@@ -11,7 +11,6 @@ type
 
 
 proc initGame(): Game =
-  ## creates a game instance with starting values
   return Game(board: [
     [" ", " ", " "], 
     [" ", " ", " "], 
@@ -41,7 +40,6 @@ proc renderTurnWinText(game: Game): VNode =
 
 
 proc renderResetButton(game: var Game): VNode =
-  ## button to reset the game's variables
   proc resetBoard(game: var Game) =
     game.running = true
     game.currentPlayerX = true
@@ -59,7 +57,6 @@ proc renderResetButton(game: var Game): VNode =
 
 proc cell(i, j: int, game: var Game): VNode =
   ## a single cell of the game board, 
-  ## has a method to add X or O to the board on click
   proc placePiece(i: int, j: int, game: var Game): proc() =
     return proc() =
       if game.board[i][j] == " " and game.running:
@@ -113,9 +110,6 @@ proc endConditions(game: var Game) =
         game.running = false
         game.draw = true
 
-  # check for win first.
-  # other way favors draw on filled board, 
-  # even if winner exists
   checkWin(game)
   checkDraw(game)
 
